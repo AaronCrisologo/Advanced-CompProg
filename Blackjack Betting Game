@@ -1,4 +1,5 @@
 import random
+import sys
 
 # Define card values
 card_values = {'Ace': 11, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7,
@@ -109,18 +110,37 @@ def play_game():
         
         # Play again player prompt
         play_cont = 1
+        if player_chips <= 0:
+             print("Game over! You're out of chips.")
         while True:
             choice = input('Do you want to play again? [Y/N]')
             if choice.lower() == 'y':
                 play_cont = 1
                 break
             elif choice.lower() == 'n':
-                print('Thanks for playing!')
+                print (main())
                 play_cont = 0
                 break
             else:
                 print('Wrong Input, Please try again.')
         if play_cont == 0:
             break
+            
+def main():
+    print("Welcome to Blackjack!")
+    print("Play Game [Press 1]")
+    print("Quit [Press 2]")
+    while True:
+        choice = input()
+        if choice == "1":
+            play_game()
+        elif choice == "2":
+            print("Thanks for playing!")
+            sys.exit()
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == '__main__':
+    main()           
             
 play_game()
