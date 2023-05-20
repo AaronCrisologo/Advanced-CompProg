@@ -13,10 +13,6 @@ card_values = {'Ace': 11, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7,
 # Define deck
 deck = list(card_values.keys()) * 4
 
-# Base chip value and player's chips
-base_chip_value = 500
-player_chips = base_chip_value
-
 # Bet function
 def place_bet():
     global player_chips
@@ -105,9 +101,8 @@ def play_game():
                 print(f'Dealer hits. Dealer\'s hand: {dealer_hand} Value: {calculate_score(dealer_hand)}\n')
                 if calculate_score(dealer_hand) > 21:
                     print('Dealer busts!\n')
-                    clear()
                     break
-        input("\nPress Enter to continue...")
+        input("Press Enter to continue...")
         
         # Calculate win, lose, or tie
         clear()
@@ -127,8 +122,12 @@ def play_game():
         else:
             print('Error')
             
-        # Play again player prompt
+        # Play again player prompt or Game Over
         print(f'You now have {player_chips} chips')
+        if player_chips <= 0:
+                input('\nYou do not have chips to play... press enter to return to main menu')
+                clear()
+                return
         play_cont = 1
         while True:
             choice = input('\nDo you want to play again? [Y/N]')
@@ -137,7 +136,7 @@ def play_game():
                 clear()
                 break
             elif choice.lower() == 'n':
-                input('\nReturning to main menu screen.. Press Enter to continue')
+                input('\nReturning to main menu screen... press Enter to continue')
                 clear()
                 play_cont = 0
                 break
@@ -146,7 +145,7 @@ def play_game():
         if play_cont == 0:
             break
 
-#Main Menu                    
+#Main Menu Screen                   
 while True:
     print("Welcome to Blackjack!")
     print("Play Game [Press 1]")
@@ -154,10 +153,13 @@ while True:
     print("Quit [Press 3]")
     choice = input('\nWhat would you like to do: ')
     if choice == "1":
+        player_chips = 500
         clear()
         play_game()
     elif choice == "3":
         print("\nThanks for playing!")
         break
     else:
-        print("Invalid choice. Please try again.")
+        print("\nInvalid choice. Please try again.")
+        time.sleep(3)
+        clear()
