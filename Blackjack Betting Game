@@ -58,6 +58,7 @@ def calculate_score(hand):
 # Main game
 def play_game():
     global player_chips
+    player_chips = 500
     while True:
         # Betting
         bet = place_bet()
@@ -80,7 +81,7 @@ def play_game():
                 print(f'\nYour hand: {player_hand} Value: {calculate_score(player_hand)}')
                 print("Dealer's hand:", [dealer_hand[0], '??'], "Value: ??")
                 if calculate_score(player_hand) > 21:
-                    print('\nYou bust!')
+                    print('\nYou bust!\n')
                     break
             elif choice.lower() == 'stand':
                 clear()
@@ -92,15 +93,15 @@ def play_game():
         
         # Dealer action
         if calculate_score(player_hand) <= 21:
-            print(f'\nPlayer\'s hand: {player_hand} Value: {calculate_score(player_hand)}\n')
+            print(f'\nPlayer\'s hand: {player_hand} Value: {calculate_score(player_hand)}')
             time.sleep(3)
             print(f'Dealer\'s hand: {dealer_hand} Value: {calculate_score(dealer_hand)}\n')
             while calculate_score(dealer_hand) < 17:
                 time.sleep(3)
                 dealer_hand = hit(dealer_hand)
-                print(f'Dealer hits. Dealer\'s hand: {dealer_hand} Value: {calculate_score(dealer_hand)}\n')
+                print(f'Dealer hits. Dealer\'s hand: {dealer_hand} Value: {calculate_score(dealer_hand)}')
                 if calculate_score(dealer_hand) > 21:
-                    print('Dealer busts!\n')
+                    print('\nDealer busts!\n')
                     break
         input("Press Enter to continue...")
         
@@ -125,7 +126,7 @@ def play_game():
         # Play again player prompt or Game Over
         print(f'You now have {player_chips} chips')
         if player_chips <= 0:
-                input('\nYou do not have chips to play... press enter to return to main menu')
+                input('\nYou do not have chips to play... press Enter to return to main menu')
                 clear()
                 return
         play_cont = 1
@@ -147,13 +148,12 @@ def play_game():
 
 #Main Menu Screen                   
 while True:
-    print("Welcome to Blackjack!")
+    print("Welcome to Blackjack!\n")
     print("Play Game [Press 1]")
     print("Placeholder [Press 2]")
     print("Quit [Press 3]")
     choice = input('\nWhat would you like to do: ')
     if choice == "1":
-        player_chips = 500
         clear()
         play_game()
     elif choice == "3":
