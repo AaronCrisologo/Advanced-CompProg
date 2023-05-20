@@ -126,20 +126,6 @@ def play_game():
             player_chips += bet
         else:
             print('Error')
-
-print("Welcome to Blackjack!")
-print("Play Game [Press 1]")
-print("Placeholder [Press 2]")
-print("Quit [Press 3]")
-while True:
-        choice = input()
-        if choice == "1":
-            play_game()
-        elif choice == "3":
-            print("Thanks for playing!")
-        else:
-            print("Invalid choice. Please try again.")
-            break
             
         # Play again player prompt
         input("\nPress Enter to continue...")
@@ -160,5 +146,17 @@ while True:
                 print('Wrong Input, Please try again.')
         if play_cont == 0:
             break
-            
-play_game()
+                    
+while True:
+    print("Welcome to Blackjack!")
+    print("Play Game [Press 1]")
+    print("Placeholder [Press 2]")
+    print("Quit [Press 3]")
+    choice = input()
+    if choice == "1":
+        play_game()
+    elif choice == "3":
+        print("\nThanks for playing!")
+        break
+    else:
+        print("Invalid choice. Please try again.")
