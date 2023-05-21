@@ -10,24 +10,27 @@ def clear():
 card_values = {'Ace': 11, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7,
                '8': 8, '9': 9, '10': 10, 'Jack': 10, 'Queen': 10, 'King': 10}
 
-# Define deck
-deck = list(card_values.keys()) * 4
-
 # Bet function
 def place_bet():
     global player_chips
     while True:
         bet = input(f'You have {player_chips} chips. How much do you want to bet? ')
         if not bet.isdigit():
-            print('Invalid input. Please enter a valid number.')
+            print('\nInvalid input. Please enter a valid number.')
+            time.sleep(3)
+            clear()
         elif int(bet) > player_chips:
-            print(f'You don\'t have enough chips. You have {player_chips} chips.')
+            print(f'\nYou don\'t have enough chips. Please enter a valid number.')
+            time.sleep(3)
+            clear()
         else:
             player_chips -= int(bet)
             return int(bet)
 
 # Deal cards from deck
 def deal_cards():
+    global deck
+    deck = list(card_values.keys()) * 4
     hand = []
     for i in range(2):
         card = random.choice(deck)
@@ -58,7 +61,7 @@ def calculate_score(hand):
 #Game over function
 def game_over():
     global player_chips
-    print('\nGame Over!')
+    print('Game Over!')
     input('You do not have chips to play... press Enter to return to main menu')
     clear()
 
@@ -261,7 +264,6 @@ def play_game():
                         print("Dealer's hand:", [dealer_hand[0], '??'], "Value: ??")
                         if calculate_score(player_hand) > 21:
                             print('\nYou bust!')
-                            clear()
                         break
                     elif player_chips-bet < 0:
                         print('You do not have enough chips to double down...')
