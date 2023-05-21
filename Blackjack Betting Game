@@ -2,7 +2,7 @@ import random
 import time
 import os
 
-#Clear Screen Function
+# Clear Screen Function
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -209,40 +209,74 @@ def play_game():
         #Skipping Variables
         skp2trn = 0
         skpfld = 0
+        skpjack = 0
+        
+        # Blackjack Auto-win
+        if calculate_score(player_hand) == 21:
+            time.sleep(1)
+            print('\nYour hand contains a Blackjack!\n')
+            print("Player's hand:", player_hand, "Value:", calculate_score(player_hand))
+            time.sleep(3)
+            print("Dealer's hand:", dealer_hand, "Value:", calculate_score(dealer_hand))
+            if calculate_score(dealer_hand) != 21:
+                print('\nDealer does not have a Blackjack!')
+            elif calculate_score(dealer_hand) == 21:
+                print('\nDealer also have a Blackjack!')
+            input("\nPress Enter to continue...")
+            clear()
+            skpjack = 1
         
         # Player Choices Prompt first turn
-        while True:
-            choice = input('\nDo you want to hit, stand, double down, or fold? ')
-            if choice.lower() == 'hit':
-                player_hand = hit(player_hand)
-                clear()
-                print(f'Player chose to hit')
-                time.sleep(3)
-                print(f'\nYour hand: {player_hand} Value: {calculate_score(player_hand)}')
-                print("Dealer's hand:", [dealer_hand[0], '??'], "Value: ??")
-                if calculate_score(player_hand) > 21:
-                    print('\nYou bust!')
-                    skp2trn = 1
+        if skpjack == 0:
+            while True:
+                choice = input('\nDo you want to hit, stand, double down, or fold? ')
+                if choice.lower() == 'hit':
+                    player_hand = hit(player_hand)
+                    clear()
+                    print(f'Player chose to hit')
+                    time.sleep(3)
+                    print(f'\nYour hand: {player_hand} Value: {calculate_score(player_hand)}')
+                    print("Dealer's hand:", [dealer_hand[0], '??'], "Value: ??")
+                    if calculate_score(player_hand) > 21:
+                        print('\nYou bust!')
+                        skp2trn = 1
+                        break
                     break
-                break
-            elif choice.lower() == 'stand':
-                clear()
-                print(f'Player chose to stand')
-                skp2trn = 1
-                time.sleep(1)
-                break
-            elif choice.lower() == 'fold':
-                player_chips += int(bet / 2)
-                print(f'You folded and received {int(bet / 2)} chips back.')
-                input("\nPress Enter to continue...")
-                skpfld = 1
-                clear()
-                break
-            else:
-                print('Invalid input. Please enter "hit", "stand", "double down", or "fold')
+                elif choice.lower() == 'stand':
+                    clear()
+                    print(f'Player chose to stand')
+                    skp2trn = 1
+                    time.sleep(1)
+                    break
+                elif choice.lower() == 'double down':
+                    if player_chips-bet >= 0:
+                        player_chips -= int(bet)
+                        bet *= 2
+                        player_hand = hit(player_hand)
+                        clear()
+                        print(f'Player chose to double down')
+                        skp2trn = 1
+                        time.sleep(3)
+                        print(f'\nYour hand: {player_hand} Value: {calculate_score(player_hand)}')
+                        print("Dealer's hand:", [dealer_hand[0], '??'], "Value: ??")
+                        if calculate_score(player_hand) > 21:
+                            print('\nYou bust!')
+                            clear()
+                        break
+                    elif player_chips-bet < 0:
+                        print('You do not have enough chips to double down...')
+                elif choice.lower() == 'fold':
+                    player_chips += int(bet / 2)
+                    print(f'You folded and received {int(bet / 2)} chips back.')
+                    input("\nPress Enter to continue...")
+                    skpfld = 1
+                    clear()
+                    break
+                else:
+                    print('Invalid input. Please enter "hit", "stand", "double down", or "fold')
             
         # Player Choice Prompt after first turn
-        if skp2trn == 0 and skpfld == 0:
+        if skp2trn == 0 and skpfld == 0 and skpjack == 0:
             while True:
                 choice = input('\nDo you want to hit or stand? ')
                 if choice.lower() == 'hit':
@@ -265,7 +299,7 @@ def play_game():
         
         
         # Dealer action
-        if skpfld == 0:
+        if skpfld == 0 and skpjack == 0:
             if calculate_score(player_hand) <= 21:
                 print(f'\nPlayer\'s hand: {player_hand} Value: {calculate_score(player_hand)}')
                 time.sleep(3)
@@ -281,12 +315,12 @@ def play_game():
             clear()
         
         # Calculate win, lose, or tie
+        player_score = calculate_score(player_hand)
+        dealer_score = calculate_score(dealer_hand)
+        print('Results:\n')
+        print(f'Player hand is {player_score}')
+        print(f'Dealer hand is {dealer_score}\n')
         if skpfld == 0:
-            player_score = calculate_score(player_hand)
-            dealer_score = calculate_score(dealer_hand)
-            print('Results:\n')
-            print(f'Player hand is {player_score}')
-            print(f'Dealer hand is {dealer_score}\n')
             if player_score <= 21 and (player_score > dealer_score or dealer_score > 21):
                 print('You win!')
                 player_chips += bet * 2
@@ -299,7 +333,7 @@ def play_game():
                 print('Error')
             
         # Play again player prompt or Game Over
-        print(f"You have {player_chips} remaining\n")
+        print(f"You have {player_chips} chips\n")
         if player_chips <= 0:
             game_over()
             clear()
@@ -307,6 +341,7 @@ def play_game():
         while True:
             choice = input('Do you want to play again? [Y/N]')
             if choice.lower() == 'y':
+                play_cont = 1
                 clear()
                 break
             elif choice.lower() == 'n':
