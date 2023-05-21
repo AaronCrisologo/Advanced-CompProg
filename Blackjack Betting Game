@@ -242,7 +242,7 @@ def play_game():
                 print('Invalid input. Please enter "hit", "stand", "double down", or "fold')
             
         # Player Choice Prompt after first turn
-        if skp2trn and skpfld == 0:
+        if skp2trn == 0 and skpfld == 0:
             while True:
                 choice = input('\nDo you want to hit or stand? ')
                 if choice.lower() == 'hit':
