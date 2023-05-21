@@ -100,6 +100,10 @@ def play_game():
                 skp2trn = 1
                 time.sleep(1)
                 break
+            elif choice.lower() == 'fold':
+                player_chips += bet / 2  # Give the player half of their bet back
+                print(f'You folded and received {bet / 2} chips back.')
+                break
             else:
                 print('Invalid input. Please enter "hit", "stand", "double down", or "fold')
             
