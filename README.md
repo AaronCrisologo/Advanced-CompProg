@@ -15,7 +15,7 @@ Final Project requirements for Advanced Computer Programming Project BSU Alangil
 
 # Contributions:
 
-**Crisologo** - Group leader, main concept of the project, wrote play_game(), place_bet(), deal_cards(), hit, and calculate_score() functions, supervised all pull request, assigned tasks for each group member, video presentation editor.
+**Crisologo** - Group leader, main concept of the project, wrote play_game() function, show_rules() function, place_bet(), deal_cards(), hit(), and calculate_score() functions, supervised all pull request, assigned tasks for each group member, video presentation editor.
 
 **Calalo** - Fold Feature in player choice prompt
 
@@ -23,6 +23,6 @@ Final Project requirements for Advanced Computer Programming Project BSU Alangil
 
 **Lagradilla** - Auto-win blackjack funtion
 
-**Madera** - Main Menu Screen, Game Over Screen, Various improvements in play_game() function.
+**Madera** - Main Menu Screen, Game Over condition, Various improvements in play_game() function.
 
 # Video Presentation Link:
