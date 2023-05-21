@@ -1,4 +1,4 @@
-# Advanced-CompProg
+# Advanced-CompProg (CS=1203)
 Final Project requirements for Advanced Computer Programming Project BSU Alangilan
 
 # Members:
