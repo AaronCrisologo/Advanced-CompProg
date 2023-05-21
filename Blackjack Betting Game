@@ -13,10 +13,6 @@ card_values = {'Ace': 11, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7,
 # Define deck
 deck = list(card_values.keys()) * 4
 
-# Base chip value and player's chips
-base_chip_value = 500
-player_chips = base_chip_value
-
 # Bet function
 def place_bet():
     global player_chips
@@ -58,10 +54,147 @@ def calculate_score(hand):
         score -= 10
         aces -= 1
     return score
+    
+#Game over function
+def game_over():
+    global player_chips
+    print('\nGame Over!')
+    input('You do not have chips to play... press Enter to return to main menu')
+    clear()
 
+# Blackjack Ruleset Function
+def show_rules():
+    page_num = 1
+    while True:
+        if page_num == 1:
+            while True:
+                print('Part 1: The Objective\n')
+                print('\u2022The objective of blackjack is to beat the dealer’s hand without going over 21.')
+                print('\u2022The best possible hand is a blackjack, which is an ace and a ten-point card (10, J, Q, or K) dealt on the first two cards.')
+                print('\u2022Unless the dealer also has a blackjack, in which case it is a push (a tie).')
+                print('\u2022If both the player and the dealer go over 21, the player loses.')
+                print('\nPage 1/5')
+                choice = input('Next Page [N], Return to Main Menu [R]: ')
+                if choice.lower() == 'n':
+                    clear()
+                    page_num += 1
+                    break
+                elif choice.lower() == 'r':
+                    input('\nReturning to main menu screen... press Enter to continue')
+                    clear()
+                    return
+                else:
+                    print('Wrong Input, Please try again.')
+                    time.sleep(2)
+                    clear()
+            
+        elif page_num == 2:
+            while True:
+                print('Part 2: The Cards\n')
+                print('\u2022Blackjack is played with one or more standard 52-card decks.')
+                print('\u2022The cards 2 through 10 have their face value, J, Q, and K are \n worth 10 points each, and the ace is worth either 1 or 11 points.')
+                print('\u2022The suits of the cards do not matter in blackjack.')
+                print('\nPage 2/5')
+                choice = input('Next Page [N], Previous Page [P], Return to Main Menu [R]: ')
+                if choice.lower() == 'n':
+                    clear()
+                    page_num += 1
+                    break
+                elif choice.lower() == 'p':
+                    clear()
+                    page_num -= 1
+                    break
+                elif choice.lower() == 'r':
+                    input('\nReturning to main menu screen... press Enter to continue')
+                    clear()
+                    return
+                else:
+                    print('Wrong Input, Please try again.')
+                    time.sleep(2)
+                    clear()
+            
+        elif page_num == 3:
+            while True:
+                print('Part 3: The Bets\n')
+                print('\u2022Before the deal, each player places a bet in their designated betting area.')
+                print('\u2022The dealer deals two cards face up to the player and one card face up and one card face down to himself/herself.')
+                print('\u2022The player can then decide how to play their hand based on their cards and the dealer’s up card.')
+                print('\nPage 3/5')
+                choice = input('Next Page [N], Previous Page [P], Return to Main Menu [R]: ')
+                if choice.lower() == 'n':
+                    clear()
+                    page_num += 1
+                    break
+                elif choice.lower() == 'p':
+                    clear()
+                    page_num -= 1
+                    break
+                elif choice.lower() == 'r':
+                    input('\nReturning to main menu screen... press Enter to continue')
+                    clear()
+                    return
+                else:
+                    print('Wrong Input, Please try again.')
+                    time.sleep(2)
+                    clear()
+            
+        elif page_num == 4:
+            while True:
+                print('Part 4: The Options\n')
+                print('\u2022The player has several options to choose from after receiving their initial two cards. Some options are only available under certain conditions. \n\nThe options are as follows:')
+                print('\u2022Hit: The player requests another card from the dealer. The player can hit as many times as they want until they stand or bust.')
+                print('\u2022Stand: The player decides to stop taking cards and end their turn.')
+                print('\u2022Double down: The player doubles their bet and receives one more card.')
+                print('\u2022Fold/Surrender: The player forfeits half their bet and gives up their hand. This option is only available before taking any other action on the hand.')
+                print('\nPage 4/5')
+                choice = input('Next Page [N], Previous Page [P], Return to Main Menu [R]: ')
+                if choice.lower() == 'n':
+                    clear()
+                    page_num += 1
+                    break
+                elif choice.lower() == 'p':
+                    clear()
+                    page_num -= 1
+                    break
+                elif choice.lower() == 'r':
+                    input('\nReturning to main menu screen... press Enter to continue')
+                    clear()
+                    return
+                else:
+                    print('Wrong Input, Please try again.')
+                    time.sleep(2)
+                    clear()
+            
+        elif page_num == 5:
+            while True:
+                print('Part 5: The Outcome\n')
+                print('\u2022After all players have finished their turns, the dealer reveals their face down card and draws more cards if necessary.')
+                print('\u2022The dealer must hit until they reach a total of 17 or more, and stand on 17 or higher.')
+                print('\u2022If the dealer busts, all players who did not bust win their bets.')
+                print('\u2022If the dealer does not bust, each player’s hand is compared to the dealer’s hand.')
+                print('\u2022If the player’s hand is higher than the dealer’s hand, the player wins their bet.')
+                print('\u2022If the player’s hand is lower than the dealer’s hand, the player loses their bet.')
+                print('\u2022If the player’s hand is equal to the dealer’s hand, it is a push and the player keeps their bet.')
+                print('\nPage 5/5')
+                choice = input('Previous Page [P], Return to Main Menu [R]: ')
+                if choice.lower() == 'p':
+                    clear()
+                    page_num -= 1
+                    break
+                elif choice.lower() == 'r':
+                    input('\nReturning to main menu screen... press Enter to continue')
+                    clear()
+                    return
+                else:
+                    print('Wrong Input, Please try again.')
+                    time.sleep(2)
+                    clear()
+    
 # Main game
 def play_game():
     global player_chips
+    player_chips = 500
+    
     while True:
         # Betting
         bet = place_bet()
@@ -73,7 +206,8 @@ def play_game():
         print("Player's hand:", player_hand, "Value:", calculate_score(player_hand))
         print("Dealer's hand:", [dealer_hand[0], '??'], "Value: ??")
         
-        # Player Choices Prompt
+        # Player Choices Prompt first turn
+        skp2trn = 0
         while True:
             choice = input('\nDo you want to hit, stand, double down, or fold? ')
             if choice.lower() == 'hit':
@@ -85,35 +219,60 @@ def play_game():
                 print("Dealer's hand:", [dealer_hand[0], '??'], "Value: ??")
                 if calculate_score(player_hand) > 21:
                     print('\nYou bust!')
-                    input("\nPress Enter to continue...")
-                    clear()
+                    skp2trn = 1
                     break
+                break
             elif choice.lower() == 'stand':
                 clear()
                 print(f'Player chose to stand')
-                time.sleep(3)
+                skp2trn = 1
+                time.sleep(1)
                 break
             else:
                 print('Invalid input. Please enter "hit", "stand", "double down", or "fold')
+            
+        # Player Choice Prompt after first turn
+        if skp2trn == 0:
+            while True:
+                choice = input('\nDo you want to hit or stand? ')
+                if choice.lower() == 'hit':
+                    player_hand = hit(player_hand)
+                    clear()
+                    print(f'Player chose to hit')
+                    time.sleep(3)
+                    print(f'\nYour hand: {player_hand} Value: {calculate_score(player_hand)}')
+                    print("Dealer's hand:", [dealer_hand[0], '??'], "Value: ??")
+                    if calculate_score(player_hand) > 21:
+                        print('\nYou bust!')
+                        break
+                elif choice.lower() == 'stand':
+                    clear()
+                    print(f'Player chose to stand')
+                    time.sleep(1)
+                    break
+                else:
+                    print('Invalid input. Please enter "hit", "stand", "double down", or "fold')
+        
         
         # Dealer action
         if calculate_score(player_hand) <= 21:
-            print(f'\nPlayer\'s hand: {player_hand} Value: {calculate_score(player_hand)}\n')
+            print(f'\nPlayer\'s hand: {player_hand} Value: {calculate_score(player_hand)}')
             time.sleep(3)
             print(f'Dealer\'s hand: {dealer_hand} Value: {calculate_score(dealer_hand)}\n')
             while calculate_score(dealer_hand) < 17:
                 time.sleep(3)
                 dealer_hand = hit(dealer_hand)
-                print(f'Dealer hits. Dealer\'s hand: {dealer_hand} Value: {calculate_score(dealer_hand)}\n')
+                print(f'Dealer hits. Dealer\'s hand: {dealer_hand} Value: {calculate_score(dealer_hand)}')
                 if calculate_score(dealer_hand) > 21:
-                    print('Dealer busts!\n')
-                    input("\nPress Enter to continue...")
-                    clear()
+                    print('Dealer busts!')
                     break
+        input("\nPress Enter to continue...")
+        clear()
         
         # Calculate win, lose, or tie
         player_score = calculate_score(player_hand)
         dealer_score = calculate_score(dealer_hand)
+        print('Results:\n')
         print(f'Player hand is {player_score}')
         print(f'Dealer hand is {dealer_score}\n')
         if player_score <= 21 and (player_score > dealer_score or dealer_score > 21):
@@ -127,24 +286,45 @@ def play_game():
         else:
             print('Error')
             
-        # Play again player prompt
-        input("\nPress Enter to continue...")
-        clear()
-        print(f'You have {player_chips} remaining')
-        play_cont = 1
+        # Play again player prompt or Game Over
+        print(f'You have {player_chips} remaining\n')
+        if player_chips <= 0:
+            game_over()
+            clear()
+            return
         while True:
-            choice = input('\nDo you want to play again? [Y/N]')
+            choice = input('Do you want to play again? [Y/N]')
             if choice.lower() == 'y':
-                play_cont = 1
                 clear()
                 break
             elif choice.lower() == 'n':
-                print('\nThanks for playing!')
-                play_cont = 0
-                break
+                input('\nReturning to main menu screen... press Enter to continue')
+                clear()
+                return
             else:
                 print('Wrong Input, Please try again.')
-        if play_cont == 0:
-            break
+                time.sleep(2)
+                clear()
             
-play_game()
+# Main game loop
+while True:
+    print("Welcome to Blackjack!")
+    print("\nPlay Game [Press 1]")
+    print("Blackjack Ruleset [Press 2]")
+    print("Quit [Press 3]")
+    choice = input('\nWhat would you like to do: ')
+    if choice == "1":
+        clear()
+        play_game()
+    elif choice == "2":
+        clear()
+        show_rules()
+    elif choice == "3":
+        print("Thanks for playing!")
+        break
+    else:
+        print("\nInvalid choice. Please try again.")
+        time.sleep(3)
+        clear()
+
+# End of program
