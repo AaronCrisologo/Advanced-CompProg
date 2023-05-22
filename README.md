@@ -7,7 +7,7 @@ Welcome to our program "blackjack betting game". This is a fun and interactive w
 
 - 🎯 Hit: This means you want to draw another card from the deck. You can hit as many times as you want until you are satisfied with your hand or you bust (go over 21).
 
-- 🧍‍ ♂️Stand: This means you are happy with your hand and you don't want any more cards. The dealer will then reveal their hand and compare it with yours to determine the winner.
+- 🧍‍ Stand: This means you are happy with your hand and you don't want any more cards. The dealer will then reveal their hand and compare it with yours to determine the winner.
 
 - ‼ Double down: This means you want to double your bet and draw one more card. You can only do this if you have two cards in your hand. After doubling down, you must stand.
 
