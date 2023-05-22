@@ -275,7 +275,7 @@ def play_game():
                     clear()
                     break
                 else:
-                    print('Invalid input. Please enter "hit", "stand", "double down", or "fold')
+                    print('Invalid input. Please enter "hit", "stand", "double down", or "fold"')
             
         # Player Choice Prompt after first turn
         if skp2trn == 0 and skpfld == 0 and skpjack == 0:
@@ -297,7 +297,7 @@ def play_game():
                     time.sleep(1)
                     break
                 else:
-                    print('Invalid input. Please enter "hit", "stand", "double down", or "fold')
+                    print('Invalid input. Please enter "hit" or "stand"')
         
         
         # Dealer action
