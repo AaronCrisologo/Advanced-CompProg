@@ -51,4 +51,10 @@ We hope you enjoy our program "blackjack betting game" and have fun playing blac
 
 # 🎥 Video Presentation Link:
 
-> ****Uploading****
+**__IMPORTANT: These are just draft videos and the full video will be uploaded later this day__**
+
+**Part 1:**
+> https://youtu.be/KCPYWLGamTQ
+
+**Part 2:**
+> https://youtu.be/VJr_YNH4M8w
